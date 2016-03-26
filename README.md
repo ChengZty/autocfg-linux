@@ -1,7 +1,7 @@
 
 ######java:
 ````shell
-wget http://shell.bluerain.io/java -O - | sh
+wget -O - http://shell.bluerain.io/java | sh
 ````
 ######groovy:
 ````shell
