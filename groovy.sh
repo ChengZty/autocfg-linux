@@ -12,7 +12,7 @@ exit
 else
 wget -O $SOFT_DIR/$FILE_NAME $DL_ADDRESS
 #tgz & rename
-(cd $SOFT_DIR && tar -zxvf $FILE_NAME && mv $SOURCE_DIR $TARGET_DIR)
+(cd $SOFT_DIR && unzip $FILE_NAME && mv $SOURCE_DIR $TARGET_DIR)
 #env
 sed -i '/groovy_/Id' /etc/profile
 echo "#Groovy_env
