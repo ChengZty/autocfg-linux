@@ -3,7 +3,7 @@
 JDK_VERSION=1.8.0_73
 JAVA_VERSION=8u73
 FILE_NAME=jdk-$JAVA_VERSION-linux-x64.tar.gz
-DL_ADDRESS=http://dl.bluerain.io/$FILE_NAME
+DL_ADDRESS=http://bridsystems.net/downloads/java/$FILE_NAME
 SOURCE_DIR=jdk$JDK_VERSION
 TARGET_DIR=jdk
 SOFT_DIR=/soft
