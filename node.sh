@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 VERSION=5.9.1
 FILE_NAME=node-v$VERSION-linux-x64.tar.xz

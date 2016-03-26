@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 JDK_VERSION=1.8.0_73
 JAVA_VERSION=8u73

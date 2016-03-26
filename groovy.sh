@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 VERSION=2.4.6
 FILE_NAME=apache-groovy-binary-$VERSION.zip

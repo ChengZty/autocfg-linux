@@ -11,3 +11,7 @@ wget -O - http://shell.bluerain.io/groovy | sh
 ````shell
 wget -O - http://shell.bluerain.io/node | sh
 ````
+######conroe:
+````shell
+wget -O - http://shell.bluerain.io/conroe | sh
+````
