@@ -5,9 +5,9 @@ wget -O - http://shell.bluerain.io/java | sh
 ````
 ######groovy:
 ````shell
-wget http://shell.bluerain.io/groovy -O - | sh
+wget -O - http://shell.bluerain.io/groovy | sh
 ````
 ######node:
 ````shell
-wget http://shell.bluerain.io/node -O - | sh
+wget -O - http://shell.bluerain.io/node | sh
 ````
