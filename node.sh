@@ -18,7 +18,7 @@ sed -i '/node_/Id' /etc/profile
 echo "#Node_env
 NODE_HOME=$SOFT_DIR/$TARGET_DIR
 PATH=\$NODE_HOME/bin:\$PATH
-export PATH GROOVY_HOME
+export PATH NODE_HOME
 " >> /etc/profile
 source /etc/profile
 fi
