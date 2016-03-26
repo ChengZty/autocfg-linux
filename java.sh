@@ -2,19 +2,23 @@
 
 JDK_VERSION=1.8.0_73
 JAVA_VERSION=8u73
-JDK_FILE_NAME=jdk-$JAVA_VERSION-linux-x64.tar.gz
+FILE_NAME=jdk-$JAVA_VERSION-linux-x64.tar.gz
+DL_ADDRESS=http://dl.bluerain.io/$FILE_NAME
+SOURCE_DIR=jdk$JDK_VERSION
+TARGET_DIR=jdk
 SOFT_DIR=/soft
 if [ ! -e $SOFT_DIR ];then
 echo $SOFT_DIR dir is not exists.
 exit
 else
-wget -O /soft/$JDK_FILE_NAME http://dl.bluerain.io/$JDK_FILE_NAME
+wget -O $SOFT_DIR/$FILE_NAME $DL_ADDRESS
 #tgz & rename
-(cd $SOFT_DIR && tar -zxvf $JDK_FILE_NAME && mv jdk$JDK_VERSION jdk)
+(cd $SOFT_DIR && tar -zxvf $FILE_NAME && mv $SOURCE_DIR $TARGET_DIR)
 #env
 sed -i '/java_/Id' /etc/profile
+sed -i '/CLASSPATH/Id' /etc/profile
 echo "#Java_env
-JAVA_HOME=$SOFT/jdk
+JAVA_HOME=$SOFT_DIR/jdk
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH JAVA_HOME CLASSPATH
