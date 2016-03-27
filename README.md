@@ -27,3 +27,7 @@ wget -O - http://shell.bluerain.io/gradle | sh
 ````shell
 wget -O - http://shell.bluerain.io/go | sh
 ````
+###### android-sdk:
+````shell
+wget -O - http://shell.bluerain.io/android-sdk | sh
+````
