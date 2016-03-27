@@ -23,3 +23,7 @@ wget -O - http://shell.bluerain.io/maven | sh
 ````shell
 wget -O - http://shell.bluerain.io/gradle | sh
 ````
+###### go:
+````shell
+wget -O - http://shell.bluerain.io/go | sh
+````
