@@ -1,21 +1,25 @@
 
-######java:
+###### java:
 ````shell
 wget -O - http://shell.bluerain.io/java | sh
 ````
-######groovy:
+###### groovy:
 ````shell
 wget -O - http://shell.bluerain.io/groovy | sh
 ````
-######node:
+###### node:
 ````shell
 wget -O - http://shell.bluerain.io/node | sh
 ````
-######conroe:
+###### conroe:
 ````shell
 wget -O - http://shell.bluerain.io/conroe | sh
 ````
-######maven:
+###### maven:
 ````shell
 wget -O - http://shell.bluerain.io/maven | sh
+````
+###### gradle:
+````shell
+wget -O - http://shell.bluerain.io/gradle | sh
 ````
