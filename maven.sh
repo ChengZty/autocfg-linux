@@ -6,6 +6,7 @@ DL_ADDRESS=http://mirrors.cnnic.cn/apache/maven/maven-3/$MAVEN_VERSION/binaries/
 SOURCE_DIR=apache-maven-$MAVEN_VERSION
 TARGET_DIR=maven
 SOFT_DIR=/soft
+MAIN_ENV_HOME=MAVEN_HOME
 if [ ! -e $SOFT_DIR ];then
 echo $SOFT_DIR dir is not exists.
 exit
@@ -16,9 +17,9 @@ wget -O $SOFT_DIR/$FILE_NAME $DL_ADDRESS
 #env
 sed -i '/maven_/Id' /etc/profile
 echo "#Maven_env
-MAVEN_HOME=$SOFT_DIR/$TARGET_DIR
-PATH=\$MAVEN_HOME/bin:\$PATH
-export PATH MAVEN_HOME
+$MAIN_ENV_HOME=$SOFT_DIR/$TARGET_DIR
+PATH=\$${MAIN_ENV_HOME}/bin:\$PATH
+export PATH $MAIN_ENV_HOME
 " >> /etc/profile
 source /etc/profile
 fi
