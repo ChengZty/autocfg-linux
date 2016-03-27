@@ -15,3 +15,7 @@ wget -O - http://shell.bluerain.io/node | sh
 ````shell
 wget -O - http://shell.bluerain.io/conroe | sh
 ````
+######maven:
+````shell
+wget -O - http://shell.bluerain.io/maven | sh
+````
