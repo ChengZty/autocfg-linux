@@ -15,10 +15,11 @@ wget -O $SOFT_DIR/$FILE_NAME $DL_ADDRESS
 #tgz & rename
 (cd $SOFT_DIR && tar zxvf $FILE_NAME && mv $SOURCE_DIR $TARGET_DIR)
 #env
-sed -i '/$TARGET_DIR_/Id' /etc/profile
+sed -i '/${TARGET_DIR}_/Id' /etc/profile
+sed -i '/$MAIN_ENV_HOME/Id' /etc/profile
 echo "#${TARGET_DIR}_env
 $MAIN_ENV_HOME=$SOFT_DIR/$TARGET_DIR
-PATH=\$${MAIN_ENV_HOME}/platform-tools:$${MAIN_ENV_HOME}/tools:\$PATH
+PATH=\$${MAIN_ENV_HOME}/platform-tools:\$${MAIN_ENV_HOME}/tools:\$PATH
 export PATH $MAIN_ENV_HOME
 " >> /etc/profile
 source /etc/profile
