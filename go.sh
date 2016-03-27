@@ -20,7 +20,7 @@ if [ ! -e $GOPATH ];then
 mkdir $GOPATH -p
 fi
 sed -i '/${TARGET_DIR}_/Id' /etc/profile
-sed -i '/GOROOT/Id' /etc/profile
+sed -i '/$MAIN_ENV_HOME/Id' /etc/profile
 sed -i '/GOPATH/Id' /etc/profile
 echo "#${TARGET_DIR}_env
 $MAIN_ENV_HOME=$SOFT_DIR/$TARGET_DIR
