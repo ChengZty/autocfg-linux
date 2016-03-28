@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if [ x$1 != x ];then
+echo 'your password:'$1
+PASSWORD=$1
+else
+echo 'no password.'
+exit
+fi
 DATA_DIR=/data
 SS_DIR=${DATA_DIR}/shadowsocks
 JSON=${SS_DIR}/c1.json
@@ -16,7 +23,7 @@ echo '{
     "server_port":25,
     "local_address": "127.0.0.1",
     "local_port":1080,
-    "password":"wscl123",
+    "password":"${$PASSWORD}",
     "timeout":300,
     "method":"aes-256-cfb",
     "fast_open": false
