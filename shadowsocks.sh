@@ -21,7 +21,7 @@ rm -rf ${JSON}
 echo '{
     "server":"0.0.0.0",
     "server_port":25,
-    "password":"${$PASSWORD}",
+    "password":"${PASSWORD}",
     "timeout":300,
     "method":"aes-256-cfb",
     "fast_open": false
