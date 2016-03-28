@@ -20,5 +20,5 @@ GROOVY_HOME=$SOFT_DIR/$TARGET_DIR
 PATH=\$GROOVY_HOME/bin:\$PATH
 export PATH GROOVY_HOME
 " >> /etc/profile
-source /etc/profile
 fi
+source /etc/profile
