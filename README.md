@@ -33,5 +33,9 @@ wget -O - http://shell.bluerain.io/android-sdk | sh
 ````
 ###### shadowsocks:
 ````shell
-wget -O - http://shell.bluerain.io/shadowsocks | sh /dev/stdin ${port} ${passwrod} ${method}
+wget -O - http://shell.bluerain.io/shadowsocks | sh /dev/stdin ${port} ${password} ${method}
+````
+###### shadowsocks-container:
+````shell
+wget -O - http://shell.bluerain.io/dc-ss | sh /dev/stdin ${pass}
 ````
