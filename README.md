@@ -31,3 +31,7 @@ wget -O - http://shell.bluerain.io/go | sh
 ````shell
 wget -O - http://shell.bluerain.io/android-sdk | sh
 ````
+###### shadowsocks:
+````shell
+wget -O - http://shell.bluerain.io/shadowsocks | sh
+````
