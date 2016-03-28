@@ -43,7 +43,7 @@ echo '{
 ' >> ${JSON}
 
 if [ ! ssserver ];then
-yum install python-setuptools && easy_install pip
+yum install python-setuptools -y && easy_install pip
 pip install shadowsocks
 fi
 ssserver -c ${JSON} -d start
