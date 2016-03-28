@@ -13,6 +13,6 @@ else
 for i in $(seq 1 10)
 do
 PASSWORD=${1}${i}
-run --name ss${i} -d -p 200${i}:8888 wscl124914/shadowsocks -s 0.0.0.0 -p 8888 -k $(PASSWORD) -m rc4-md5
+run --name ss${i} -d -p 200${i}:8888 wscl124914/shadowsocks -s 0.0.0.0 -p 8888 -k ${PASSWORD} -m rc4-md5
 done
 fi
