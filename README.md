@@ -1,41 +1,45 @@
 
-###### java:
+java:
 ````shell
-wget -O - http://shell.bluerain.io/java | sh
+curl -s http://shell.bluerain.io/java | bash
 ````
-###### groovy:
+groovy:
 ````shell
-wget -O - http://shell.bluerain.io/groovy | sh
+curl -s http://shell.bluerain.io/groovy | bash
 ````
-###### node:
+node:
 ````shell
-wget -O - http://shell.bluerain.io/node | sh
+curl -s http://shell.bluerain.io/node | bash
 ````
-###### conroe:
+conroe:
 ````shell
-wget -O - http://shell.bluerain.io/conroe | sh
+curl -s http://shell.bluerain.io/conroe | bash
 ````
-###### maven:
+maven:
 ````shell
-wget -O - http://shell.bluerain.io/maven | sh
+curl -s http://shell.bluerain.io/maven | bash
 ````
-###### gradle:
+gradle:
 ````shell
-wget -O - http://shell.bluerain.io/gradle | sh
+curl -s http://shell.bluerain.io/gradle | bash
 ````
-###### go:
+go:
 ````shell
-wget -O - http://shell.bluerain.io/go | sh
+curl -s http://shell.bluerain.io/go | bash
 ````
-###### android-sdk:
+dkutil:
 ````shell
-wget -O - http://shell.bluerain.io/android-sdk | sh
+curl -s http://shell.bluerain.io/dkutil | bash
 ````
-###### shadowsocks:
+android-sdk:
 ````shell
-wget -O - http://shell.bluerain.io/shadowsocks | sh /dev/stdin ${port} ${password} ${method}
+curl -s http://shell.bluerain.io/android-sdk | bash
 ````
-###### shadowsocks-container:
+shadowsocks:
 ````shell
-wget -O - http://shell.bluerain.io/dc-ss | sh /dev/stdin ${pass}
+curl -s http://shell.bluerain.io/shadowsocks | bash -s ${port} ${password} ${method}
+````
+shadowsocks-container:
+````shell
+curl -s http://shell.bluerain.io/dc-ss | bash -s ${pass}
 ````
