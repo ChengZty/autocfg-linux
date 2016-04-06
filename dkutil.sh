@@ -1,6 +1,10 @@
 #! /usr/bin/env bash
 
+if [ x$1 != x ];then
+soft_dir=$1
+else
 soft_dir=/soft
+fi
 core_file=DockerUtil.py
 if [ ! -e ${soft_dir} ];then
 echo ${soft_dir} is not exists.

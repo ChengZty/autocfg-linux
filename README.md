@@ -27,10 +27,6 @@ go:
 ````shell
 curl -sL http://shell.bluerain.io/go | bash
 ````
-dkutil:
-````shell
-curl -sL http://shell.bluerain.io/dkutil | bash
-````
 android-sdk:
 ````shell
 curl -sL http://shell.bluerain.io/android-sdk | bash
