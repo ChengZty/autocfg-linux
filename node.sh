@@ -7,7 +7,6 @@ file_name=node-v${version}-linux-x64.tar.xz
 source_dir=node-v${version}-linux-x64
 target_dir=node
 dl_address=https://nodejs.org/dist/v${version}/${file_name}
-soft_dir=/soft
 if [ ! -e ${soft_dir} ];then
 echo ${soft_dir} dir is not exists.
 exit
