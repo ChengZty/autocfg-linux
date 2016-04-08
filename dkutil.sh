@@ -13,3 +13,6 @@ rm -rf ${soft_dir}/dkutil
 (cd ${soft_dir} && git clone https://github.com/hentai-mew/dkutil.git)
 chmod +x ${soft_dir}/dkutil/${core_file}
 ln -fs ${soft_dir}/dkutil/${core_file} /usr/bin/dkutil
+echo dkutil installed.
+echo you can show the version.
+echo the cammand:dkutil -v
