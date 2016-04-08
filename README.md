@@ -9,7 +9,7 @@ curl -sL http://shell.bluerain.io/groovy | bash
 ````
 node:
 ````shell
-curl -sL http://shell.bluerain.io/node | bash
+curl -sL http://shell.bluerain.io/node | bash ${soft_dir}
 ````
 conroe:
 ````shell
