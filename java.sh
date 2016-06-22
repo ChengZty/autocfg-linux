@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
-JDK_VERSION=1.8.0_73
-JAVA_VERSION=8u73
-FILE_NAME=jdk-${JAVA_VERSION}-linux-x64.tar.gz
-DL_ADDRESS=http://bridsystems.net/downloads/java/${FILE_NAME}
-SOURCE_DIR=jdk${JDK_VERSION}
-TARGET_DIR=jdk
-SOFT_DIR=/soft
-if [ ! -e ${SOFT_DIR} ];then
-echo ${SOFT_DIR} dir is not exists.
+jdk_version=1.8.0_91
+java_version=8u91
+file_name=jdk-${java_version}-linux-x64.tar.gz
+dl_address=http://bridsystems.net/downloads/java/${file_name}
+source_dir=jdk${jdk_version}
+target_dir=jdk
+soft_dir=/soft
+if [ ! -e ${soft_dir} ];then
+echo ${soft_dir} dir is not exists.
 exit
 else
-wget -O ${SOFT_DIR}/${FILE_NAME} ${DL_ADDRESS}
+wget -O ${soft_dir}/${file_name} ${dl_address}
 #tgz & rename
-(cd ${SOFT_DIR} && tar -zxvf ${FILE_NAME} && mv ${SOURCE_DIR} ${TARGET_DIR})
+(cd ${soft_dir} && tar -zxvf ${file_name} && mv ${source_dir} ${target_dir})
 #env
 sed -i '/java_/Id' /etc/profile
 sed -i '/CLASSPATH/Id' /etc/profile
 echo "#Java_env
-JAVA_HOME=${SOFT_DIR}/jdk
+JAVA_HOME=${soft_dir}/jdk
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
 export PATH JAVA_HOME CLASSPATH
