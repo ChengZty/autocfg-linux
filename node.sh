@@ -2,7 +2,7 @@
 
 if [ x$1 != x ];then soft_dir=$1;else soft_dir=/soft;fi
 echo your soft_dir:${soft_dir}
-version=5.10.1
+version=6.2.2
 file_name=node-v${version}-linux-x64.tar.xz
 source_dir=node-v${version}-linux-x64
 target_dir=node
