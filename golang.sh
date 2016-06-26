@@ -7,7 +7,6 @@ file_name=go${version}.linux-amd64.tar.gz
 dl_address=https://storage.googleapis.com/golang/${file_name}
 source_dir=go
 target_dir=go
-main_env_home=goroot
 go_path=${soft_dir}/GOPATH
 if [ ! -e ${soft_dir} ];then
 echo ${soft_dir} dir is not exists.
