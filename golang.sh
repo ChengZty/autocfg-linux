@@ -12,7 +12,7 @@ if [ ! -e ${soft_dir} ];then
 echo ${soft_dir} dir is not exists.
 exit
 else
-wget -o ${soft_dir}/${file_name} ${dl_address}
+wget -O ${soft_dir}/${file_name} ${dl_address}
 #rm old version
 rm -rf ${soft_dir}/${target_dir}
 #tgr & rename
