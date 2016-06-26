@@ -19,7 +19,7 @@ wget -o ${soft_dir}/${file_name} ${dl_address}
 sed -i '/maven_/Id' /etc/profile
 echo "#Maven_env
 MAIN_ENV_HOME=$soft_dir/$target_dir
-PATH=\${MAIN_ENV_HOME}/bin:\$PATH
+PATH=\$MAIN_ENV_HOME/bin:\$PATH
 export PATH \MAIN_ENV_HOME
 " >> /etc/profile
 source /etc/profile
