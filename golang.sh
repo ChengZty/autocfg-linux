@@ -22,10 +22,8 @@ if [ ! -e ${go_path} ];then
 mkdir ${go_path} -p
 fi
 sed -i '/Go_env/Id' /etc/profile
-sed -i '/GOROOT=/Id' /etc/profile
-sed -i '/GOPATH=/Id' /etc/profile
-sed -i '/\$GOROOT/Id' /etc/profile
-sed -i '/\$GOPATH/Id' /etc/profile
+sed -i '/GOROOT/Id' /etc/profile
+sed -i '/GOPATH/Id' /etc/profile
 echo "#Go_env
 GOROOT=$soft_dir/$target_dir
 GOPATH=$go_path
