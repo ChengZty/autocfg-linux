@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+if [ x$1 != x ];then soft_dir=$1;else soft_dir=/soft;fi
+echo your soft_dir:${soft_dir}
 jdk_version=1.8.0_91
 java_version=8u91
 file_name=jdk-${java_version}-linux-x64.tar.gz
 dl_address=http://bridsystems.net/downloads/java/${file_name}
 source_dir=jdk${jdk_version}
 target_dir=jdk
-soft_dir=/soft
 if [ ! -e ${soft_dir} ];then
 echo ${soft_dir} dir is not exists.
 exit
