@@ -1,25 +1,26 @@
 #!/usr/bin/env bash
 
-MAVEN_VERSION=3.3.9
-FILE_NAME=apache-maven-$MAVEN_VERSION-bin.tar.gz
-DL_ADDRESS=http://mirrors.cnnic.cn/apache/maven/maven-3/$MAVEN_VERSION/binaries/$FILE_NAME
-SOURCE_DIR=apache-maven-$MAVEN_VERSION
-TARGET_DIR=maven
-SOFT_DIR=/soft
-MAIN_ENV_HOME=MAVEN_HOME
-if [ ! -e $SOFT_DIR ];then
-echo $SOFT_DIR dir is not exists.
+if [ x$1 != x ];then soft_dir=$1;else soft_dir=/soft;fi
+echo your soft_dir:${soft_dir}
+maven_version=3.3.9
+file_name=apache-maven-${maven_version}-bin.tar.gz
+dl_address=http://mirrors.cnnic.cn/apache/maven/maven-3/${maven_version}/binaries/${file_name}
+source_dir=apache-maven-${maven_version}
+target_dir=maven
+main_env_home=maven_home
+if [ ! -e ${soft_dir}  ];then
+echo ${soft_dir} dir is not exists.
 exit
 else
-wget -O $SOFT_DIR/$FILE_NAME $DL_ADDRESS
+wget -o ${soft_dir}/${file_name} ${dl_address}
 #tgz & rename
-(cd $SOFT_DIR && tar -zxvf $FILE_NAME && mv $SOURCE_DIR $TARGET_DIR)
+(cd ${soft_dir} && tar -zxvf ${file_name} && mv ${source_dir} ${target_dir})
 #env
 sed -i '/maven_/Id' /etc/profile
 echo "#Maven_env
-$MAIN_ENV_HOME=$SOFT_DIR/$TARGET_DIR
-PATH=\$${MAIN_ENV_HOME}/bin:\$PATH
-export PATH $MAIN_ENV_HOME
+MAIN_ENV_HOME=$soft_dir/$target_dir
+PATH=\${MAIN_ENV_HOME}/bin:\$PATH
+export PATH \MAIN_ENV_HOME
 " >> /etc/profile
 source /etc/profile
 fi
