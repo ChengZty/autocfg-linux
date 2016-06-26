@@ -23,9 +23,9 @@ gradle:
 ````shell
 curl -sL http://shell.bluerain.io/gradle | bash -s ${soft_dir}
 ````
-go:
+golang:
 ````shell
-curl -sL http://shell.bluerain.io/go | bash -s ${soft_dir}
+curl -sL http://shell.bluerain.io/golang | bash -s ${soft_dir}
 ````
 android-sdk:
 ````shell
