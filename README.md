@@ -35,7 +35,3 @@ shadowsocks:
 ````shell
 curl -sL http://shell.bluerain.io/shadowsocks | bash -s ${port} ${password} ${method}
 ````
-shadowsocks-container:
-````shell
-curl -sL http://shell.bluerain.io/dc-ss | bash -s ${pass}
-````
