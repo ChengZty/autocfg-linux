@@ -1,25 +1,26 @@
 #!/usr/bin/env bash
 
-VERSION=2.13
-FILE_NAME=gradle-${VERSION}-bin.zip
-DL_ADDRESS=https://services.gradle.org/distributions/${FILE_NAME}
-SOURCE_DIR=gradle-${VERSION}
-TARGET_DIR=gradle
-SOFT_DIR=/soft
-MAIN_ENV_HOME=GRADLE_HOME
-if [ ! -e ${SOFT_DIR} ];then
-echo ${SOFT_DIR} dir is not exists.
+if [ x$1 != x ];then soft_dir=$1;else soft_dir=/soft;fi
+echo your soft_dir:${soft_dir}
+
+version=2.14
+file_name=gradle-${version}-bin.zip
+dl_address=https://services.gradle.org/distributions/${file_name}
+source_dir=gradle-${version}
+target_dir=gradle
+if [ ! -e ${soft_dir} ];then
+echo ${soft_dir} dir is not exists.
 exit
 else
-wget -O ${SOFT_DIR}/${FILE_NAME} ${DL_ADDRESS}
+wget -O ${soft_dir}/${file_name} ${dl_address}
 #tgz & rename
-(cd ${SOFT_DIR} && unzip ${FILE_NAME} && mv ${SOURCE_DIR} ${TARGET_DIR})
+(cd ${soft_dir} && unzip ${file_name} && mv ${source_dir} ${target_dir})
 #env
-sed -i '/${TARGET_DIR}_/Id' /etc/profile
-echo "#${TARGET_DIR}_env
-$MAIN_ENV_HOME=$SOFT_DIR/$TARGET_DIR
-PATH=\$${MAIN_ENV_HOME}/bin:\$PATH
-export PATH $MAIN_ENV_HOME
+sed -i '/Gradle_/Id' /etc/profile
+echo "#Gradle_env
+GRADLE_HOME=$soft_dir/$target_dir
+PATH=\$GRADLE_HOME/bin:\$PATH
+export PATH GRADLE_HOME
 " >> /etc/profile
 source /etc/profile
 fi
