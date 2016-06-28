@@ -28,7 +28,7 @@ echo "#Go_env
 GOROOT=$soft_dir/$target_dir
 GOPATH=$go_path
 PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
-export PATH GOROOT GOPATH
+export GOROOT GOPATH
 " >> /etc/profile
 source /etc/profile
 fi

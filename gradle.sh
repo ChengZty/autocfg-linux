@@ -20,7 +20,7 @@ sed -i '/Gradle_/Id' /etc/profile
 echo "#Gradle_env
 GRADLE_HOME=$soft_dir/$target_dir
 PATH=\$GRADLE_HOME/bin:\$PATH
-export PATH GRADLE_HOME
+export GRADLE_HOME
 " >> /etc/profile
 source /etc/profile
 fi

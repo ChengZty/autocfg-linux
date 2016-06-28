@@ -20,7 +20,7 @@ sed -i '/node_/Id' /etc/profile
 echo "#Node_env
 NODE_HOME=$soft_dir/$target_dir
 PATH=\$NODE_HOME/bin:\$PATH
-export PATH NODE_HOME
+export NODE_HOME
 " >> /etc/profile
 source /etc/profile
 fi

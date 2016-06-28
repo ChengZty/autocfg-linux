@@ -21,7 +21,7 @@ sed -i '/M2_HOME/Id' /etc/profile
 echo "#Maven_env
 M2_HOME=$soft_dir/$target_dir
 PATH=\$M2_HOME/bin:\$PATH
-export PATH M2_HOME
+export M2_HOME
 " >> /etc/profile
 source /etc/profile
 fi

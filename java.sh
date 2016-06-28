@@ -22,7 +22,7 @@ echo "#Java_env
 JAVA_HOME=${soft_dir}/jdk
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
-export PATH JAVA_HOME CLASSPATH
+export JAVA_HOME CLASSPATH
 " >> /etc/profile
 source /etc/profile
 fi
