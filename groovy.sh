@@ -14,6 +14,7 @@ exit
 else
 wget -O ${soft_dir}/${file_name} ${dl_address}
 #tgz & rename
+rm -rf ${soft_dir}/${target_dir}
 (cd ${soft_dir} && unzip ${file_name} && mv ${source_dir} ${target_dir})
 #env
 sed -i '/groovy_/Id' /etc/profile
