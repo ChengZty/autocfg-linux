@@ -39,7 +39,7 @@ reset(){
 boot(){
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
     boot-log 'booting...'
-    (cd ${MC_HOME} && java -jar $JVM_OPTS minecraft_server.jar nogui)
+    (cd ${MC_HOME} && java -jar ${JVM_OPTS} minecraft_server.jar nogui)
 }
 main(){
     # 如果不是以startup.sh启动
