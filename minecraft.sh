@@ -9,7 +9,7 @@ if [ ! -e /usr/bin/wget ];then apt install wget -y;fi
 # 下载server.jar（如果没有参数则下载最新，否则下载参数地址中的版本）
 VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c548254f5e3f66492d178a48db63/server.jar
 if test $1;then VERSION_ADDRESS=$1;fi
-wget -O ${MC_HOME}/minecraft-server.jar \
+wget -O ${MC_HOME}/minecraft_server.jar \
 ${VERSION_ADDRESS}
 # 备份jar到 /data 目录
 cp ${MC_HOME}/minecraft_server.jar /data/
@@ -29,7 +29,7 @@ reset(){
 boot(){
     echo 'booting...'
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
-    (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
+    (cd ${MC_HOME} && java -jar $* minecraft_server.jar nogui)
 }
 main(){
     # 如果不存在startup.sh文件
