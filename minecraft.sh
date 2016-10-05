@@ -25,4 +25,3 @@ else
     (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
 fi
 EOF
-chmod +x ${MC_HOME}/startup.sh
