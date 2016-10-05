@@ -21,14 +21,14 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 MC_HOME=/data/minecraft
 reset(){
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat ${MC_HOME}/version`;fi
-        (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
-    fi
+    (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
 }
 if ! test $0 = "${MC_HOME}/startup.sh";then
     if [ ! -e ${MC_HOME}/startup.sh ];then
         reset
     else
         ${MC_HOME}/startup.sh;
+    fi
 else
     reset
 fi
