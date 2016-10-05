@@ -44,7 +44,7 @@ main(){
             reset
             main
         else # 如果存在
-            # 执行运行
+            # 执行主目录启动脚本
             ${MC_HOME}/startup.sh
         fi
     else
