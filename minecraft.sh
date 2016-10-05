@@ -25,6 +25,9 @@ reset(){
     echo 'reseting...'
     # 从 data 目录还原 jar
     cp /data/minecraft_server.jar ${MC_HOME}/
+    # 修改EULA
+    echo eula=true > ${MC_HOME}/eula.txt
+
 }
 boot(){
     echo 'booting...'
