@@ -33,3 +33,4 @@ else
     reset
 fi
 EOF
+chmod +x ${MC_HOME}/startup.sh
