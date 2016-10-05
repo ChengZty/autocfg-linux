@@ -20,6 +20,8 @@ echo eula=true > ${MC_HOME}/eula.txt
 # 创建启动脚本
 tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
+
+JVM_OPTS=''
 MC_HOME=/data/minecraft
 boot-log(){
     echo "Boot Script/Log: $1"
@@ -37,7 +39,7 @@ reset(){
 boot(){
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
     boot-log 'booting...'
-    (cd ${MC_HOME} && java -jar $* minecraft_server.jar nogui)
+    (cd ${MC_HOME} && java -jar $JVM_OPTS minecraft_server.jar nogui)
 }
 main(){
     # 如果不是以startup.sh启动
