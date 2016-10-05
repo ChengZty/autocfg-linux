@@ -25,6 +25,8 @@ reset(){
     echo 'reseting...'
     # 从 data 目录还原 jar
     cp /data/minecraft_server.jar ${MC_HOME}/
+    # 还原启动脚本
+    cp /usr/local/bin/start-mc-server ${MC_HOME}/startup.sh
     # 修改EULA
     echo eula=true > ${MC_HOME}/eula.txt
 
@@ -35,9 +37,9 @@ boot(){
     (cd ${MC_HOME} && java -jar $* minecraft_server.jar nogui)
 }
 main(){
-    # 如果不存在startup.sh文件
+    # 如果不是以startup.sh启动
     if ! test $0 = "${MC_HOME}/startup.sh";then
-        if [ ! -e ${MC_HOME}/startup.sh ];then
+        if [ ! -e ${MC_HOME}/startup.sh ];then # 并且不存在startup.sh
             # 重置然后启动
             reset
             boot
