@@ -42,7 +42,7 @@ main(){
         if [ ! -e ${MC_HOME}/startup.sh ];then # 并且不存在startup.sh
             # 重置然后启动
             reset
-            boot
+            main
         else # 如果存在
             # 执行运行
             boot
