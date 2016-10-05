@@ -12,7 +12,7 @@ if test $1;then VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft-server.jar \
 ${VERSION_ADDRESS}
 # 写入版本地址
-echo ${VERSION_ADDRESS} > ${MC_HOME}/version
+echo ${VERSION_ADDRESS} > /data/version
 # 创建eula文件
 echo eula=true > ${MC_HOME}/eula.txt
 # 创建启动脚本
@@ -21,7 +21,7 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 MC_HOME=/data/minecraft
 reset(){
     echo 'reseting...'
-    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat ${MC_HOME}/version`;fi
+    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat /data/version`;fi
     boot
 }
 boot(){
