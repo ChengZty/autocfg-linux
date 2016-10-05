@@ -6,9 +6,11 @@ MC_HOME=/data/minecraft
 if [ ! -e ${MC_HOME} ]; then mkdir -p ${MC_HOME};fi
 # 是否存在wget，不存在则安装
 if [ ! -e /usr/bin/wget ];then apt install wget -y;fi
-# 下载1.10.2版本 server.jar 到 MC_HOME 目录下，重命名为 minecraft-server.jar
+# 下载server.jar（如果没有参数则下载最新，否则下载参数地址中的版本）
+LAST_VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c548254f5e3f66492d178a48db63/server.jar
+if test $1;then LAST_VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft-server.jar \
-https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c548254f5e3f66492d178a48db63/server.jar
+${LAST_VERSION_ADDRESS}
 # 创建eula文件
 echo eula=true > ${MC_HOME}/eula.txt
 # 创建启动脚本
