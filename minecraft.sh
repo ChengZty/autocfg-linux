@@ -45,7 +45,7 @@ main(){
             main
         else # 如果存在
             # 执行运行
-            boot
+            ${MC_HOME}/startup.sh
         fi
     else
         boot
