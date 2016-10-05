@@ -21,8 +21,11 @@ echo eula=true > ${MC_HOME}/eula.txt
 tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 MC_HOME=/data/minecraft
+boot-log(){
+    echo "Boot Script/Log: $1"
+}
 reset(){
-    echo 'reseting...'
+    boot-log 'reseting...'
     # 从 data 目录还原 jar
     cp /data/minecraft_server.jar ${MC_HOME}/
     # 还原启动脚本
@@ -32,8 +35,8 @@ reset(){
 
 }
 boot(){
-    echo 'booting...'
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
+    boot-log 'booting...'
     (cd ${MC_HOME} && java -jar $* minecraft_server.jar nogui)
 }
 main(){
