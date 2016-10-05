@@ -20,17 +20,28 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 MC_HOME=/data/minecraft
 reset(){
+    echo 'reseting...'
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat ${MC_HOME}/version`;fi
+    boot
+}
+boot(){
+    echo 'booting...'
     (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
 }
-if ! test $0 = "${MC_HOME}/startup.sh";then
-    if [ ! -e ${MC_HOME}/startup.sh ];then
-        reset
+main(){
+    # 如果不存在startup.sh文件
+    if ! test $0 = "${MC_HOME}/startup.sh";then
+        if [ ! -e ${MC_HOME}/startup.sh ];then
+            # 重置
+            reset
+        else # 如果存在
+            # 执行运行
+            boot
+        fi
     else
-        ${MC_HOME}/startup.sh;
+        boot
     fi
-else
-    reset
-fi
+}
+main
 EOF
 chmod +x ${MC_HOME}/startup.sh
