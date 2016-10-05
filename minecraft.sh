@@ -21,7 +21,7 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 MC_HOME=/data/minecraft
 if [ -e ${MC_HOME}/startup.sh ];then ${MC_HOME}/startup.sh;
 else
-    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash `cat ${MC_HOME}/version`;fi
+    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat ${MC_HOME}/version`;fi
     (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
 fi
 EOF
