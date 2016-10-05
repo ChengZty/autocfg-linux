@@ -19,7 +19,7 @@ echo eula=true > ${MC_HOME}/eula.txt
 tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 MC_HOME=/data/minecraft
-if [ -e ${MC_HOME}/startup.sh ];then ${MC_HOME}/startup.sh;
+if ! test $0 = "${MC_HOME}/startup.sh";then ${MC_HOME}/startup.sh;
 else
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat ${MC_HOME}/version`;fi
     (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
