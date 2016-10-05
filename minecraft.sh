@@ -11,6 +11,8 @@ VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c5
 if test $1;then VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft-server.jar \
 ${VERSION_ADDRESS}
+# 备份jar到 /data 目录
+cp ${MC_HOME}/minecraft_server.jar /data/
 # 写入版本地址
 echo ${VERSION_ADDRESS} > /data/version
 # 创建eula文件
@@ -20,7 +22,9 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 MC_HOME=/data/minecraft
 reset(){
-    curl -sL http://shell.bluerain.io/minecraft | bash -s `cat /data/version`
+    echo 'reseting...'
+    # 从 data 目录还原 jar
+    cp /data/minecraft_server.jar ${MC_HOME}/
 }
 boot(){
     echo 'booting...'
@@ -31,8 +35,9 @@ main(){
     # 如果不存在startup.sh文件
     if ! test $0 = "${MC_HOME}/startup.sh";then
         if [ ! -e ${MC_HOME}/startup.sh ];then
-            # 重置
+            # 重置然后启动
             reset
+            boot
         else # 如果存在
             # 执行运行
             boot
