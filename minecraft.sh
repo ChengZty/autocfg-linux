@@ -20,12 +20,11 @@ tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 MC_HOME=/data/minecraft
 reset(){
-    echo 'reseting...'
-    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then curl -sL http://shell.bluerain.io/minecraft | bash -s `cat /data/version`;fi
-    boot
+    curl -sL http://shell.bluerain.io/minecraft | bash -s `cat /data/version`
 }
 boot(){
     echo 'booting...'
+    if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
     (cd ${MC_HOME} && java -jar $* minecraft-server.jar nogui)
 }
 main(){
