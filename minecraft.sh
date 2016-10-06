@@ -29,7 +29,7 @@ boot-log(){
 reset(){
     boot-log 'reseting...'
     # 从 data 目录还原 jar
-    cp /data/.minecraft_server.jar ${MC_HOME}/
+    cp /data/.minecraft_server.jar ${MC_HOME}/minecraft_server.jar
     # 还原启动脚本
     cp /usr/local/bin/start-mc-server ${MC_HOME}/startup.sh
     # 修改EULA
