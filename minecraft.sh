@@ -12,9 +12,9 @@ if test $1;then VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft_server.jar \
 ${VERSION_ADDRESS}
 # 备份jar到 /data 目录
-cp ${MC_HOME}/minecraft_server.jar /data/
+cp ${MC_HOME}/minecraft_server.jar /data/.minecraft_server.jar
 # 写入版本地址
-echo ${VERSION_ADDRESS} > /data/version
+echo ${VERSION_ADDRESS} > /data/.version
 # 创建eula文件
 echo eula=true > ${MC_HOME}/eula.txt
 # 创建启动脚本
@@ -29,7 +29,7 @@ boot-log(){
 reset(){
     boot-log 'reseting...'
     # 从 data 目录还原 jar
-    cp /data/minecraft_server.jar ${MC_HOME}/
+    cp /data/.minecraft_server.jar ${MC_HOME}/
     # 还原启动脚本
     cp /usr/local/bin/start-mc-server ${MC_HOME}/startup.sh
     # 修改EULA
