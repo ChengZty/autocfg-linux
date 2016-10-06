@@ -21,7 +21,7 @@ echo eula=true > ${MC_HOME}/eula.txt
 tee ${MC_HOME}/startup.sh <<-'EOF'
 #!/usr/bin/env bash
 
-JVM_OPTS=''
+JVM_OPTS='-Xmx1024M -Xms1024M'
 MC_HOME=/data/minecraft
 boot-log(){
     echo "Boot Script/Log: $1"
@@ -39,7 +39,7 @@ reset(){
 boot(){
     if [ ! -e ${MC_HOME}/minecraft_server.jar ];then reset;fi
     boot-log 'booting...'
-    (cd ${MC_HOME} && java -jar ${JVM_OPTS} minecraft_server.jar nogui)
+    (cd ${MC_HOME} && java ${JVM_OPTS} -jar minecraft_server.jar nogui)
 }
 main(){
     # 如果不是以startup.sh启动
