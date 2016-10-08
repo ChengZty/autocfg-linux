@@ -46,5 +46,18 @@ curl -sL http://shell.bluerain.io/commons | bash -s java /usr/local 1000
 curl -sL http://shell.bluerain.io/release/commons | bash -s java /usr/local 1000
 ````
 
-
+### 注意
+1. 上述有些环境的包是从海外节点拉取下来的，可能出现网络问题。如果走代理(例如proxychains工具)则是:
+    ````
+    curl -sL http://shell.bluerain.io/release/commons | proxychains bash -s java /usr/local 1000
+    ````
+2. 所有的脚本由于要写入环境变量，所以需要使用ROOT来执行。如果是非root用户，则应该:
+    ````
+    curl -sL http://shell.bluerain.io/release/commons | sudo bash -s java /usr/local 1000
+    ````
+    这也是第三个参数(uid/gid)存在的理由。因为如果是sudo提权执行的脚本，那么生成的目录是root所属的，会造成权限问题。所以需要指定安装后目录的权限所属。   
+    一般来讲，安装系统时生成的非root用户（自己设置的）的 u/gid 是1000，root 是0。当然第三个参数用名称也行，例如:
+    ````
+    curl -sL http://shell.bluerain.io/release/commons | sudo bash -s java /usr/local hentioe
+    ````
 更多的环境有待支持:)
