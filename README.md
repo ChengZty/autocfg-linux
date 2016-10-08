@@ -1,37 +1,50 @@
+## My Shells
+支持 Java、Node、Go、Groovy、Grails、Maven、Gradle、AndroidSdk、Hadoop 环境的自动配置。
 
-java:
-````shell
-curl -sL http://shell.bluerain.io/java | bash -s ${soft_dir}
+参数说明:   
+
+
+环境对应的参数命名：
 ````
-groovy:
-````shell
-curl -sL http://shell.bluerain.io/groovy | bash -s ${soft_dir}
+#########################
+# Java       -> java    #
+# Node       -> node    #
+# Go         -> golang  #
+# Groovy     -> groovy  #
+# Grails     -> grails  #
+# Maven      -> maven   #
+# Gradle     -> gradle  #
+# AndroidSdk -> android #
+# Hadoop     -> hadoop  #
+#########################
 ````
-node:
-````shell
-curl -sL http://shell.bluerain.io/node | bash -s ${soft_dir}
+Usage:
 ````
-conroe:
-````shell
-curl -sL http://shell.bluerain.io/conroe | bash -s ${soft_dir}
+bash commons.sh ${env type} ${install dir} ${uid/gid}
 ````
-maven:
-````shell
-curl -sL http://shell.bluerain.io/maven | bash -s ${soft_dir}
+参数说明:
 ````
-gradle:
-````shell
-curl -sL http://shell.bluerain.io/gradle | bash -s ${soft_dir}
+${env type}         # 环境类型
+${install dir}      # 安装目录
+${uid/gid}          # 用户/组 ID
 ````
-golang:
-````shell
-curl -sL http://shell.bluerain.io/golang | bash -s ${soft_dir}
+Example:
 ````
-android-sdk:
-````shell
-curl -sL http://shell.bluerain.io/android-sdk | bash -s ${soft_dir}
+bash commons.sh java /usr/local 1000
 ````
-shadowsocks:
-````shell
-curl -sL http://shell.bluerain.io/shadowsocks | bash -s ${port} ${password} ${method}
+上面命令的第一个参数 java 可以换成所支持的任意一种环境类型。
+
+## 网络拉取执行
+我的服务器nginx对本项目做了映射，可以直接网络拉取并执行。例如
 ````
+curl -sL http://shell.bluerain.io/commons | bash -s java /usr/local 1000
+````
+-s 后面是参数。
+
+当然，我推荐用release版本的地址:
+````
+curl -sL http://shell.bluerain.io/release/commons | bash -s java /usr/local 1000
+````
+
+
+更多的环境有待支持:)
