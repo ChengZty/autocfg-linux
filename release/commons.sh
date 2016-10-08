@@ -2,6 +2,7 @@
 V_JDK=8u91
 V_NODE=4.6.0
 V_GO=1.7.1
+V_RUST=1.12.0
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
@@ -101,6 +102,15 @@ PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
 export GOROOT GOPATH" >> /etc/profile
     }
     common-set-profile
+}
+rust_env() {
+    SOFT_DIR=/tmp/rust
+    ADDRESS="https://static.rust-lang.org/dist/rust-${V_RUST}-x86_64-unknown-linux-gnu.tar.gz"
+    SAVE_NAME="rust${V_RUST}.tar.gz"
+    DIR_NAME='rust'
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    (cd /tmp/${ENV_TYPE}/${DIR_NAME} && ./install.sh)
 }
 groovy_env() {
     ADDRESS="https://dl.bintray.com/groovy/maven/apache-groovy-binary-${V_GROOVY}.zip"
