@@ -1,14 +1,29 @@
 #!/usr/bin/env bash
+V_JDK=8u91
+V_NODE=4.6.0
+V_GO=1.7.1
+V_GROOVY=2.4.7
+V_GRAILS=3.2.0
+V_MAVEN=3.3.9
+V_GRADLE=3.0
+V_ANDROID_SDK=24.4.1
+V_HADOOP=3.7.3
 ENV_TYPE=$1 
 SOFT_DIR=$2 
+UID_GID=${3}:${3} 
+echo environment: ${ENV_TYPE}
+echo install to: ${SOFT_DIR}
+echo udi:gid: ${UID_GID}
 common-dl() {
     address=$1; file_name=$2
-    if test /tmp/${ENV_TYPE};then mkdir /tmp/${ENV_TYPE};fi
+    if [ ! -e /tmp/${ENV_TYPE} ];then mkdir /tmp/${ENV_TYPE};fi
     wget -O /tmp/${ENV_TYPE}/${file_name} ${address}
     DL_FILE=/tmp/${ENV_TYPE}/${file_name}
 }
 SUFFIX_TAR='tar'
 SUFFIX_TAR_GZ='tar.gz'
+SUFFIX_TAR_XZ='tar.xz'
+SUFFIX_ZIP='zip'
 common-unzip() {
     suffix=$1; dir_name=$2
     home_path=${SOFT_DIR}/${dir_name}
@@ -24,6 +39,10 @@ common-unzip() {
         ;;
         ${SUFFIX_TAR_GZ}) bak && tar -zxvf ${DL_FILE} -C ${home_path} && mv_my_dir
         ;;
+        ${SUFFIX_TAR_XZ}) bak && tar -Jxf ${DL_FILE} -C ${home_path} && mv_my_dir
+        ;;
+        ${SUFFIX_ZIP}) bak && unzip ${DL_FILE} -d ${home_path} && mv_my_dir
+        ;;
         *) echo \*
     esac
 }
@@ -32,26 +51,12 @@ common-set-profile() {
         sed -i "/${key}/Id" /etc/profile
     done
     write
+    chown -R ${UID_GID} ${home_path}
     source /etc/profile
 }
-test_env() {
-    ADDRESS='http://dl.bluerain.io/test.tar.gz'
-    SAVE_NAME='test.tar.gz.1'
-    DIR_NAME='test'
-    ENV_KEYS=('test_')
-    common-dl ${ADDRESS} ${SAVE_NAME}
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
-    write() {
-        echo "
-TEST_HOME=${home_path}
-PATH=\$TEST_HOME/:\$PATH
-export TEST_HOME" >> /etc/profile
-    }
-    common-set-profile
-}
 java_env() {
-    ADDRESS='http://bridsystems.net/downloads/java/jdk-8u91-linux-x64.tar.gz'
-    SAVE_NAME='jdk.tar.gz'
+    ADDRESS="http://bridsystems.net/downloads/java/jdk-${V_JDK}-linux-x64.tar.gz"
+    SAVE_NAME="jdk${V_JDK}.tar.gz"
     DIR_NAME='jdk'
     ENV_KEYS=('Java_' 'CLASSPATH')
     common-dl ${ADDRESS} ${SAVE_NAME}
@@ -65,8 +70,129 @@ export JAVA_HOME CLASSPATH" >> /etc/profile
     }
     common-set-profile
 }
+node_env() {
+    ADDRESS="https://nodejs.org/dist/v${V_NODE}/node-v${V_NODE}-linux-x64.tar.xz"
+    SAVE_NAME="node${V_NODE}.tar.xz"
+    DIR_NAME='node'
+    ENV_KEYS=('node_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_XZ} ${DIR_NAME}
+    write() {
+        echo "
+NODE_HOME=${home_path}
+PATH=\$NODE_HOME/bin:\$PATH
+export NODE_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+golang_env() {
+    ADDRESS="https://storage.googleapis.com/golang/go${V_GO}.linux-amd64.tar.gz"
+    SAVE_NAME="go${V_GO}.tar.gz"
+    DIR_NAME='go'
+    ENV_KEYS=('go_env' 'GOROOT' 'GOPATH')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    if [ ! -e ${SOFT_DIR}/GOPATH ];then mkdir ${SOFT_DIR}/GOPATH;fi
+    write() {
+        echo "
+GOROOT=${home_path}
+GOPATH=${SOFT_DIR}/GOPATH
+PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
+export GOROOT GOPATH" >> /etc/profile
+    }
+    common-set-profile
+}
+groovy_env() {
+    ADDRESS="https://dl.bintray.com/groovy/maven/apache-groovy-binary-${V_GROOVY}.zip"
+    SAVE_NAME="groovy${V_GROOVY}.zip"
+    DIR_NAME='groovy'
+    ENV_KEYS=('groovy_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    write() {
+        echo "
+GROOVY_HOME=${home_path}
+PATH=\$GROOVY_HOME/bin:\$PATH
+export GROOVY_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+grails_env() {
+    ADDRESS="https://github.com/grails/grails-core/releases/download/v${V_GRAILS}/grails-${V_GRAILS}.zip"
+    SAVE_NAME="grails${V_GRAILS}.zip"
+    DIR_NAME='grails'
+    ENV_KEYS=('grails_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    write() {
+        echo "
+GRAILS_HOME=${home_path}
+PATH=\$GRAILS_HOME/bin:\$PATH
+export GRAILS_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+maven_env() {
+    ADDRESS="http://mirrors.cnnic.cn/apache/maven/maven-3/${V_MAVEN}/binaries/apache-maven-${V_MAVEN}-bin.tar.gz"
+    SAVE_NAME="maven${V_MAVEN}.tar.gz"
+    DIR_NAME='maven'
+    ENV_KEYS=('maven_' 'm2_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    write() {
+        echo "
+M2_HOME=${home_path}
+PATH=\$M2_HOME/bin:\$PATH
+export M2_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+gradle_env() {
+    ADDRESS="https://services.gradle.org/distributions/gradle-${V_GRADLE}-all.zip"
+    SAVE_NAME="gradle${V_GRADLE}.zip"
+    DIR_NAME='gradle'
+    ENV_KEYS=('gradle_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    write() {
+        echo "
+GRADLE_HOME=${home_path}
+PATH=\$GRADLE_HOME/bin:\$PATH
+export GRADLE_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+android_env() {
+    ADDRESS="https://dl.google.com/android/android-sdk_r${V_ANDROID_SDK}-linux.tgz"
+    SAVE_NAME="android-sdk${V_ANDROID_SDK}.tgz"
+    DIR_NAME='android-sdk'
+    ENV_KEYS=('android_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    write() {
+        echo "
+ANDROID_SDK_HOME=${home_path}
+PATH=\$ANDROID_SDK_HOME/platform-tools:\$ANDROID_SDK_HOME/tools:\$PATH
+export ANDROID_SDK_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
+hadoop_env() {
+    ADDRESS="http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-${V_HADOOP}/hadoop-${V_HADOOP}.tar.gz"
+    SAVE_NAME="hadoop${V_HADOOP}.tar.gz"
+    DIR_NAME='hadoop'
+    ENV_KEYS=('hadoop_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    write() {
+        echo "
+HADOOP_HOME=${home_path}
+PATH=\$HADOOP_HOME/bin:\$PATH
+export HADOOP_HOME" >> /etc/profile
+    }
+    common-set-profile
+}
 main() {
     echo -n `${ENV_TYPE}_env`
 }
 main
-chown 1000:1000 ${home_path} -R
