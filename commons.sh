@@ -8,6 +8,7 @@
 # Java       -> java    #
 # Node       -> node    #
 # Go         -> golang  #
+# Rust       -> rust    #
 # Groovy     -> groovy  #
 # Grails     -> grails  #
 # Maven      -> maven   #
@@ -21,6 +22,7 @@
 V_JDK=8u91
 V_NODE=4.6.0
 V_GO=1.7.1
+V_RUST=1.12.0
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
@@ -178,6 +180,23 @@ export GOROOT GOPATH" >> /etc/profile
     }
     # 3.2 调用函数完成环境变量配置
     common-set-profile
+}
+# Rust环境
+rust_env() {
+    # 重置安装目录变量
+    SOFT_DIR=/tmp/rust
+    # 0.1 定义变量: 下载地址
+    ADDRESS="https://static.rust-lang.org/dist/rust-${V_RUST}-x86_64-unknown-linux-gnu.tar.gz"
+    # 0.2 定义变量: 保存文件名
+    SAVE_NAME="rust${V_RUST}.tar.gz"
+    # 0.3 定义变量: 解压目录名
+    DIR_NAME='rust'
+    # 1.下载
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    # 2.解压
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    # 3.执行安装脚本
+    (cd /tmp/${ENV_TYPE}/${DIR_NAME} && ./install.sh)
 }
 # Groovy环境
 groovy_env() {
