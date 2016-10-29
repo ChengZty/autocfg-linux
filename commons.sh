@@ -52,7 +52,7 @@ common-dl() {
     wget -O /tmp/${ENV_TYPE}/${file_name} ${address}
     # 定义变量
     DL_FILE=/tmp/${ENV_TYPE}/${file_name}
-    chmod 777 /tmp/${ENV_TYPE}
+    chmod 777 -R /tmp/${ENV_TYPE}
 }
 
 # 解压函数

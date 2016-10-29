@@ -20,7 +20,7 @@ common-dl() {
     if [ ! -e /tmp/${ENV_TYPE} ];then mkdir /tmp/${ENV_TYPE};fi
     wget -O /tmp/${ENV_TYPE}/${file_name} ${address}
     DL_FILE=/tmp/${ENV_TYPE}/${file_name}
-    chmod 777 /tmp/${ENV_TYPE}
+    chmod 777 -R /tmp/${ENV_TYPE}
 }
 SUFFIX_TAR='tar'
 SUFFIX_TAR_GZ='tar.gz'
