@@ -119,7 +119,7 @@ java_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Java_env
+        echo "#:Java_env
 JAVA_HOME=${home_path}
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
@@ -146,7 +146,7 @@ node_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Node_env
+        echo "#:Node_env
 NODE_HOME=${home_path}
 PATH=\$NODE_HOME/bin:\$PATH
 export NODE_HOME" >> /etc/profile
@@ -173,7 +173,7 @@ golang_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Go_env
+        echo "#:Go_env
 GOROOT=${home_path}
 GOPATH=${SOFT_DIR}/GOPATH
 PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
@@ -216,7 +216,7 @@ groovy_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Groovy_env
+        echo "#:Groovy_env
 GROOVY_HOME=${home_path}
 PATH=\$GROOVY_HOME/bin:\$PATH
 export GROOVY_HOME" >> /etc/profile
@@ -241,7 +241,7 @@ grails_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Grails_env
+        echo "#:Grails_env
 GRAILS_HOME=${home_path}
 PATH=\$GRAILS_HOME/bin:\$PATH
 export GRAILS_HOME" >> /etc/profile
@@ -266,7 +266,7 @@ maven_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Maven_env
+        echo "#:Maven_env
 M2_HOME=${home_path}
 PATH=\$M2_HOME/bin:\$PATH
 export M2_HOME" >> /etc/profile
@@ -291,7 +291,7 @@ gradle_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Gradle_env
+        echo "#:Gradle_env
 GRADLE_HOME=${home_path}
 PATH=\$GRADLE_HOME/bin:\$PATH
 export GRADLE_HOME" >> /etc/profile
@@ -316,7 +316,7 @@ android_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Android_env
+        echo "#:Android_env
 ANDROID_SDK_HOME=${home_path}
 PATH=\$ANDROID_SDK_HOME/platform-tools:\$ANDROID_SDK_HOME/tools:\$PATH
 export ANDROID_SDK_HOME" >> /etc/profile
@@ -341,7 +341,7 @@ hadoop_env() {
     # 3.配置环境变量（永久性）
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
-        echo "#Hadoop_env
+        echo "#:Hadoop_env
 HADOOP_HOME=${home_path}
 PATH=\$HADOOP_HOME/bin:\$PATH
 export HADOOP_HOME" >> /etc/profile

@@ -27,7 +27,7 @@ def main():
             annotations = ''
             if m:
                 annotations = m.group()
-                if annotations.startswith('#!'):
+                if annotations.startswith('#!') or annotations.startswith('#:'):
                     new_content += line
                     continue
             new_content += line.replace(str(annotations), '', -1)

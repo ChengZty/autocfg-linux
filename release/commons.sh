@@ -64,7 +64,7 @@ java_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Java_env
 JAVA_HOME=${home_path}
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
@@ -80,7 +80,7 @@ node_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_XZ} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Node_env
 NODE_HOME=${home_path}
 PATH=\$NODE_HOME/bin:\$PATH
 export NODE_HOME" >> /etc/profile
@@ -96,7 +96,7 @@ golang_env() {
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
     if [ ! -e ${SOFT_DIR}/GOPATH ];then mkdir ${SOFT_DIR}/GOPATH;fi
     write() {
-        echo "
+        echo "#:Go_env
 GOROOT=${home_path}
 GOPATH=${SOFT_DIR}/GOPATH
 PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
@@ -121,7 +121,7 @@ groovy_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Groovy_env
 GROOVY_HOME=${home_path}
 PATH=\$GROOVY_HOME/bin:\$PATH
 export GROOVY_HOME" >> /etc/profile
@@ -136,7 +136,7 @@ grails_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Grails_env
 GRAILS_HOME=${home_path}
 PATH=\$GRAILS_HOME/bin:\$PATH
 export GRAILS_HOME" >> /etc/profile
@@ -151,7 +151,7 @@ maven_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Maven_env
 M2_HOME=${home_path}
 PATH=\$M2_HOME/bin:\$PATH
 export M2_HOME" >> /etc/profile
@@ -166,7 +166,7 @@ gradle_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Gradle_env
 GRADLE_HOME=${home_path}
 PATH=\$GRADLE_HOME/bin:\$PATH
 export GRADLE_HOME" >> /etc/profile
@@ -181,7 +181,7 @@ android_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Android_env
 ANDROID_SDK_HOME=${home_path}
 PATH=\$ANDROID_SDK_HOME/platform-tools:\$ANDROID_SDK_HOME/tools:\$PATH
 export ANDROID_SDK_HOME" >> /etc/profile
@@ -196,7 +196,7 @@ hadoop_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
     write() {
-        echo "
+        echo "#:Hadoop_env
 HADOOP_HOME=${home_path}
 PATH=\$HADOOP_HOME/bin:\$PATH
 export HADOOP_HOME" >> /etc/profile
