@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 V_JDK=8u91
 V_NODE=4.6.0
-V_GO=1.7.1
-V_RUST=1.12.0
+V_GO=1.7.3
+V_RUST=1.12.1
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
@@ -20,6 +20,7 @@ common-dl() {
     if [ ! -e /tmp/${ENV_TYPE} ];then mkdir /tmp/${ENV_TYPE};fi
     wget -O /tmp/${ENV_TYPE}/${file_name} ${address}
     DL_FILE=/tmp/${ENV_TYPE}/${file_name}
+    chmod 777 /tmp/${ENV_TYPE}
 }
 SUFFIX_TAR='tar'
 SUFFIX_TAR_GZ='tar.gz'
