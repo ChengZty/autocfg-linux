@@ -6,6 +6,7 @@
 # arg03 -> UID:GID(权限)
 #########################
 # Java       -> java    #
+# Scala      -> scala   #
 # Node       -> node    #
 # Go         -> golang  #
 # Rust       -> rust    #
