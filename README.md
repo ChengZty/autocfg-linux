@@ -50,7 +50,7 @@ curl -sL http://shell.bluerain.io/release/commons | bash -s java /usr/local 1000
 ````
 
 ### 注意
-1. 上述有些环境的包是从海外节点拉取下来的，可能出现网络问题。如果走代理(例如 proxychains 工具)则是: 
+1. 上述有些环境的包是从海外节点拉取下来的，可能出现网络问题。如果走代理(例如 proxychains 工具)则是:   
     ````
     curl -sL http://shell.bluerain.io/release/commons | proxychains bash -s java /usr/local 1000
     ````   
