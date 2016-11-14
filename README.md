@@ -8,7 +8,7 @@
 ````
 #########################
 # Java       -> java    #
-# Scala      -> Scala   #
+# Scala      -> scala   #
 # Node       -> node    #
 # Go         -> golang  #
 # Rust       -> rust    #
