@@ -22,13 +22,13 @@
 ````
 Usage:
 ````shell
-bash commons.sh ${env type} ${install dir} ${uid/gid}
+bash commons.sh ${environment} ${path} ${uid/gid}
 ````
 参数说明:
 ````
-${env type}         # 环境类型
-${install dir}      # 安装目录
-${uid/gid}          # 用户/组 ID
+environment         # 环境类型
+path                # 安装目录
+uid/gid             # 用户/组 ID
 ````
 Example:
 ````shell
