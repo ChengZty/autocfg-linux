@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 V_JDK=8u91
+V_SCALA=2.12.0
 V_NODE=4.6.0
 V_GO=1.7.3
-V_RUST=1.12.1
+V_RUST=1.13.0
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
-V_GRADLE=3.0
+V_GRADLE=3.1
 V_ANDROID_SDK=24.4.1
 V_HADOOP=3.7.3
 ENV_TYPE=$1 
@@ -69,6 +70,21 @@ JAVA_HOME=${home_path}
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
 export JAVA_HOME CLASSPATH" >> /etc/profile
+    }
+    common-set-profile
+}
+scala_env() {
+    ADDRESS="http://downloads.lightbend.com/scala/${V_SCALA}/scala-${V_SCALA}.tgz"
+    SAVE_NAME="scala${V_SCALA}.taz"
+    DIR_NAME='scala'
+    ENV_KEYS=('Scala_')
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    write() {
+        echo "#:Scala_env
+SCALA_HOME=${home_path}
+PATH=\$SCALA_HOME/bin:\$PATH
+export SCALA_HOME" >> /etc/profile
     }
     common-set-profile
 }

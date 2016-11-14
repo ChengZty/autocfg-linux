@@ -1,5 +1,5 @@
 ## My Shells
-支持 Java、Node、Go、Rust、Groovy、Grails、Maven、Gradle、AndroidSdk、Hadoop 环境的自动配置。
+支持 Java、Scala、Node、Go、Rust、Groovy、Grails、Maven、Gradle、AndroidSdk、Hadoop 环境的自动配置。
 
 参数说明:   
 
@@ -8,6 +8,7 @@
 ````
 #########################
 # Java       -> java    #
+# Scala      -> Scala   #
 # Node       -> node    #
 # Go         -> golang  #
 # Rust       -> rust    #

@@ -20,6 +20,7 @@
 # 推荐使用release版本
 
 V_JDK=8u91
+V_SCALA=2.12.0
 V_NODE=4.6.0
 V_GO=1.7.3
 V_RUST=1.13.0
@@ -124,6 +125,31 @@ JAVA_HOME=${home_path}
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
 export JAVA_HOME CLASSPATH" >> /etc/profile
+    }
+    # 3.2 调用函数完成环境变量配置
+    common-set-profile
+}
+# Scala环境
+scala_env() {
+    # 0.1 定义变量: 下载地址
+    ADDRESS="http://downloads.lightbend.com/scala/${V_SCALA}/scala-${V_SCALA}.tgz"
+    # 0.2 定义变量: 保存文件名
+    SAVE_NAME="scala${V_SCALA}.taz"
+    # 0.3 定义变量: 解压目录名
+    DIR_NAME='scala'
+    # 0.4 定义变量(数组): 删除旧环境变量关键字
+    ENV_KEYS=('Scala_')
+    # 1.下载
+    common-dl ${ADDRESS} ${SAVE_NAME}
+    # 2.解压
+    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    # 3.配置环境变量（永久性）
+    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
+    write() {
+        echo "#:Scala_env
+SCALA_HOME=${home_path}
+PATH=\$SCALA_HOME/bin:\$PATH
+export SCALA_HOME" >> /etc/profile
     }
     # 3.2 调用函数完成环境变量配置
     common-set-profile
