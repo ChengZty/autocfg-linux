@@ -71,5 +71,6 @@ curl -sL http://shell.bluerain.io/release/commons | bash -s java /usr/local 1000
     
     ````
     curl -sL http://shell.bluerain.io/release/commons | sudo bash -s java /usr/local hentioe
-    ````   
+    ````
+
 更多的环境有待支持:)
