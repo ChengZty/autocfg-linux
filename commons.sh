@@ -21,7 +21,7 @@
 # 推荐使用release版本
 
 V_JDK=8u91
-V_SCALA=2.12.0
+V_SCALA=2.12.1
 V_NODE=6.9.2
 V_GO=1.7.4
 V_RUST=1.13.0
