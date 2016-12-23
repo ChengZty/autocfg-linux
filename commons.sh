@@ -24,7 +24,7 @@ V_JDK=8u91
 V_SCALA=2.12.1
 V_NODE=6.9.2
 V_GO=1.7.4
-V_RUST=1.13.0
+V_RUST=1.14.0
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
@@ -223,6 +223,8 @@ rust_env() {
     common-dl ${ADDRESS} ${SAVE_NAME}
     # 2.解压
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    # 2.5 卸载旧版本
+    if [ -e /rust/ ];then /rust/install.sh --uninstall;fi
     # 3.执行安装脚本
     (cd /tmp/${ENV_TYPE}/${DIR_NAME} && ./install.sh)
 }
