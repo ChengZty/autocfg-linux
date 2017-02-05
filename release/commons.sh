@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 V_JDK=8u91
-V_SCALA=2.12.0
-V_NODE=6.9.2
+V_SCALA=2.12.1
+V_NODE=6.9.5
 V_GO=1.7.4
-V_RUST=1.13.0
+V_RUST=1.14.0
 V_GROOVY=2.4.7
 V_GRAILS=3.2.0
 V_MAVEN=3.3.9
@@ -127,6 +127,7 @@ rust_env() {
     DIR_NAME='rust'
     common-dl ${ADDRESS} ${SAVE_NAME}
     common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    if [ -e /rust/ ];then /rust/install.sh --uninstall;fi
     (cd /tmp/${ENV_TYPE}/${DIR_NAME} && ./install.sh)
 }
 groovy_env() {
