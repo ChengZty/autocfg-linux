@@ -37,11 +37,11 @@ V_HADOOP=3.7.3
 
 ENV_TYPE=$1 # 环境类型
 SOFT_DIR=$2 # 安装目录
-UID_GID=${3}:${3} # 用户/组 ID
+UID_GID="${3}:${3}" # 用户/组 ID
 
-echo environment: ${ENV_TYPE}
-echo install to: ${SOFT_DIR}
-echo udi:gid: ${UID_GID}
+echo environment: "${ENV_TYPE}"
+echo install to: "${SOFT_DIR}"
+echo udi:gid: "${UID_GID}"
 
 # 定义函数
 
@@ -50,11 +50,11 @@ echo udi:gid: ${UID_GID}
 # arg2= 保存文件名
 common-dl() {
     address=$1; file_name=$2
-    if [ ! -e /tmp/${ENV_TYPE} ];then mkdir /tmp/${ENV_TYPE};fi
-    wget -O /tmp/${ENV_TYPE}/${file_name} ${address}
+    if [ ! -e /tmp/"${ENV_TYPE}" ];then mkdir /tmp/"${ENV_TYPE}";fi
+    wget -O /tmp/"${ENV_TYPE}"/"${file_name}" "${address}"
     # 定义变量
     DL_FILE=/tmp/${ENV_TYPE}/${file_name}
-    chmod 777 -R /tmp/${ENV_TYPE}
+    chmod 777 -R /tmp/"${ENV_TYPE}"
 }
 
 # 解压函数
@@ -67,14 +67,14 @@ SUFFIX_TAR_XZ='tar.xz'
 SUFFIX_ZIP='zip'
 common-unzip() {
     suffix=$1; dir_name=$2
-    home_path=${SOFT_DIR}/${dir_name}
+    home_path="${SOFT_DIR}/${dir_name}"
     # 备份函数
     bak(){
-        if [ -e ${home_path} ];then mv ${home_path} ${home_path}.bak.`date +%s.%N`;fi
-        mkdir ${home_path}
+        if [ -e "${home_path}" ];then mv "${home_path} ${home_path}".bak.`date +%s.%N`;fi
+        mkdir "${home_path}"
     }
     mv_my_dir() {
-        (cd ${home_path} && mv `echo *`/* ${home_path}/)
+        (cd "${home_path}" && mv `echo *`/* "${home_path}"/)
     }
     case ${suffix} in
         ${SUFFIX_TAR}) bak && tar -xvf ${DL_FILE} -C ${home_path} && mv_my_dir
@@ -94,12 +94,12 @@ common-unzip() {
 # arg2= 写入的环境变量内容
 common-set-profile() {
 
-    for key in ${ENV_KEYS[@]};do
+    for key in "${ENV_KEYS[@]}";do
         sed -i "/${key}/Id" /etc/profile
     done
     write
     # 执行结束修改SOFT目录到指定权限
-    chown -R ${UID_GID} ${home_path}
+    chown -R "${UID_GID} ${home_path}"
     source /etc/profile
 }
 # Environment Started.
@@ -246,7 +246,7 @@ groovy_env() {
     # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Groovy_env
-GROOVY_HOME=${home_path}
+GROOVY_HOME=${home_path}${ENV_TYPE}
 PATH=\$GROOVY_HOME/bin:\$PATH
 export GROOVY_HOME" >> /etc/profile
     }
