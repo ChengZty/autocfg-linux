@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
 # 公共 BashShell 支持大量环境的自动化配置
-# arg01 -> 环境的名称
-# arg02 -> 安装到目录
-# arg03 -> UID:GID(权限)
+# arg01 -> 安装到目录
+# arg02 -> UID:GID
+# arg03 -> 环境的名称
 #########################
 # Java       -> java    #
 # Scala      -> scala   #
 # Node       -> node    #
 # Go         -> golang  #
-# Rust       -> rust    #
 # Groovy     -> groovy  #
 # Grails     -> grails  #
 # Maven      -> maven   #
@@ -20,28 +19,27 @@
 # 当前为开发(Dev)版本
 # 推荐使用release版本
 
-V_JDK=8u91
-V_SCALA=2.12.1
-V_NODE=6.10.0
+V_JDK=8u112
+V_SCALA=2.12.2
+V_NODE=6.10.3
 V_GO=1.8.1
-V_RUST=1.15.1
-V_GROOVY=2.4.7
-V_GRAILS=3.2.0
-V_MAVEN=3.3.9
-V_GRADLE=3.1
-V_ANDROID_SDK=24.4.1
-V_HADOOP=3.7.3
+V_GROOVY=2.4.11
+V_GRAILS=3.3.0.M1
+V_MAVEN=3.5.0
+V_GRADLE=3.5
+V_ANDROID_SDK=3859397
+V_HADOOP=2.8.0
 
 # Dev Started:
 # 定义（接受传参）常量
 
-ENV_TYPE=$1 # 环境类型
-SOFT_DIR=$2 # 安装目录
-UID_GID="${3}:${3}" # 用户/组 ID
+SOFT_DIR=$1 # 安装目录
+UID_GID=$2 # 用户/组 ID
+ENV_TYPE=$3 # 环境类型
 
-echo environment: "${ENV_TYPE}"
-echo install to: "${SOFT_DIR}"
-echo udi:gid: "${UID_GID}"
+echo Environment: "${ENV_TYPE}"
+echo Install to: "${SOFT_DIR}"
+echo UID:GID: "${UID_GID}"
 
 # 定义函数
 
@@ -49,12 +47,12 @@ echo udi:gid: "${UID_GID}"
 # arg1= 下载地址
 # arg2= 保存文件名
 common-dl() {
-    address=$1; file_name=$2
-    if [ ! -e /tmp/"${ENV_TYPE}" ];then mkdir /tmp/"${ENV_TYPE}";fi
-    wget -O /tmp/"${ENV_TYPE}"/"${file_name}" "${address}"
+    ADDRESS=$1; FILE_NAME=$2
+    if [ ! -e "/tmp/${ENV_TYPE}" ];then mkdir "/tmp/${ENV_TYPE}";fi
+    wget -O "/tmp/${ENV_TYPE}/${FILE_NAME}" "${ADDRESS}"
     # 定义变量
-    DL_FILE=/tmp/${ENV_TYPE}/${file_name}
-    chmod 777 -R /tmp/"${ENV_TYPE}"
+    DL_FILE="/tmp/${ENV_TYPE}/${FILE_NAME}"
+    chmod 777 "/tmp/${ENV_TYPE}" -R
 }
 
 # 解压函数
@@ -66,24 +64,24 @@ SUFFIX_TAR_GZ='tar.gz'
 SUFFIX_TAR_XZ='tar.xz'
 SUFFIX_ZIP='zip'
 common-unzip() {
-    suffix=$1; dir_name=$2
-    home_path="${SOFT_DIR}/${dir_name}"
+    SUFFIX=$1; DIR_NAME=$2
+    HOME_PATH="${SOFT_DIR}/${DIR_NAME}"
     # 备份函数
     bak(){
-        if [ -e "${home_path}" ];then mv "${home_path} ${home_path}".bak.`date +%s.%N`;fi
-        mkdir "${home_path}"
+        if [ -e "${HOME_PATH}" ];then mv "${HOME_PATH}" "${HOME_PATH}.bak".`date +%s.%N`;fi
+        mkdir "${HOME_PATH}"
     }
     mv_my_dir() {
-        (cd "${home_path}" && mv `echo *`/* "${home_path}"/)
+        (cd "${HOME_PATH}" && mv `echo *`/* "${HOME_PATH}"/)
     }
-    case ${suffix} in
-        ${SUFFIX_TAR}) bak && tar -xvf ${DL_FILE} -C ${home_path} && mv_my_dir
+    case ${SUFFIX} in
+        "${SUFFIX_TAR}") bak && tar -xvf "${DL_FILE}" -C "${HOME_PATH}" && mv_my_dir
         ;;
-        ${SUFFIX_TAR_GZ}) bak && tar -zxvf ${DL_FILE} -C ${home_path} && mv_my_dir
+        "${SUFFIX_TAR_GZ}") bak && tar -zxvf "${DL_FILE}" -C "${HOME_PATH}" && mv_my_dir
         ;;
-        ${SUFFIX_TAR_XZ}) bak && tar -Jxf ${DL_FILE} -C ${home_path} && mv_my_dir
+        "${SUFFIX_TAR_XZ}") bak && tar -Jxf "${DL_FILE}" -C "${HOME_PATH}" && mv_my_dir
         ;;
-        ${SUFFIX_ZIP}) bak && unzip ${DL_FILE} -d ${home_path} && mv_my_dir
+        "${SUFFIX_ZIP}") bak && unzip "${DL_FILE}" -d "${HOME_PATH}" && mv_my_dir
         ;;
         *) echo \*
     esac
@@ -99,7 +97,7 @@ common-set-profile() {
     done
     write
     # 执行结束修改SOFT目录到指定权限
-    chown -R "${UID_GID} ${home_path}"
+    chown -R "${UID_GID}" "${HOME_PATH}"
     source /etc/profile
 }
 # Environment Started.
@@ -107,7 +105,7 @@ common-set-profile() {
 # Java环境
 java_env() {
     # 0.1 定义变量: 下载地址
-    ADDRESS="http://bridsystems.net/downloads/java/jdk-${V_JDK}-linux-x64.tar.gz"
+    ADDRESS="http://mirrors.linuxeye.com/jdk/jdk-${V_JDK}-linux-x64.tar.gz"
     # 0.2 定义变量: 保存文件名
     SAVE_NAME="jdk${V_JDK}.tar.gz"
     # 0.3 定义变量: 解压目录名
@@ -115,14 +113,13 @@ java_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('Java_' 'CLASSPATH')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Java_env
-JAVA_HOME=${home_path}
+JAVA_HOME=${HOME_PATH}
 PATH=\$JAVA_HOME/bin:\$PATH
 CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar
 export JAVA_HOME CLASSPATH" >> /etc/profile
@@ -141,14 +138,13 @@ scala_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('Scala_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Scala_env
-SCALA_HOME=${home_path}
+SCALA_HOME=${HOME_PATH}
 PATH=\$SCALA_HOME/bin:\$PATH
 export SCALA_HOME" >> /etc/profile
     }
@@ -167,14 +163,13 @@ node_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('node_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_XZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_XZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Node_env
-NODE_HOME=${home_path}
+NODE_HOME=${HOME_PATH}
 PATH=\$NODE_HOME/bin:\$PATH
 export NODE_HOME" >> /etc/profile
     }
@@ -192,41 +187,21 @@ golang_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('go_env' 'GOROOT' 'GOPATH')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 2.1 创建GOPATH
-    if [ ! -e ${SOFT_DIR}/GOPATH ];then mkdir ${SOFT_DIR}/GOPATH;fi
+    if [ ! -e "${SOFT_DIR}/GOPATH" ];then mkdir "${SOFT_DIR}/GOPATH";fi
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Go_env
-GOROOT=${home_path}
+GOROOT=${HOME_PATH}
 GOPATH=${SOFT_DIR}/GOPATH
 PATH=\$GOROOT/bin:\$GOPATH/bin:\$PATH
 export GOROOT GOPATH" >> /etc/profile
     }
     # 3.2 调用函数完成环境变量配置
     common-set-profile
-}
-# Rust环境
-rust_env() {
-    # 重置安装目录变量
-    SOFT_DIR=/tmp/rust
-    # 0.1 定义变量: 下载地址
-    ADDRESS="https://static.rust-lang.org/dist/rust-${V_RUST}-x86_64-unknown-linux-gnu.tar.gz"
-    # 0.2 定义变量: 保存文件名
-    SAVE_NAME="rust${V_RUST}.tar.gz"
-    # 0.3 定义变量: 解压目录名
-    DIR_NAME='rust'
-    # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
-    # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
-    # 2.5 卸载旧版本
-    if [ -e /rust/ ];then /rust/install.sh --uninstall;fi
-    # 3.执行安装脚本
-    (cd /tmp/${ENV_TYPE}/${DIR_NAME} && ./install.sh)
 }
 # Groovy环境
 groovy_env() {
@@ -239,14 +214,13 @@ groovy_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('groovy_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    common-unzip "${SUFFIX_ZIP}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Groovy_env
-GROOVY_HOME=${home_path}${ENV_TYPE}
+GROOVY_HOME=${HOME_PATH}${ENV_TYPE}
 PATH=\$GROOVY_HOME/bin:\$PATH
 export GROOVY_HOME" >> /etc/profile
     }
@@ -264,14 +238,13 @@ grails_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('grails_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    common-unzip "${SUFFIX_ZIP}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Grails_env
-GRAILS_HOME=${home_path}
+GRAILS_HOME=${HOME_PATH}
 PATH=\$GRAILS_HOME/bin:\$PATH
 export GRAILS_HOME" >> /etc/profile
     }
@@ -289,14 +262,13 @@ maven_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('maven_' 'm2_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Maven_env
-M2_HOME=${home_path}
+M2_HOME=${HOME_PATH}
 PATH=\$M2_HOME/bin:\$PATH
 export M2_HOME" >> /etc/profile
     }
@@ -314,14 +286,13 @@ gradle_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('gradle_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_ZIP} ${DIR_NAME}
+    common-unzip "${SUFFIX_ZIP}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Gradle_env
-GRADLE_HOME=${home_path}
+GRADLE_HOME=${HOME_PATH}
 PATH=\$GRADLE_HOME/bin:\$PATH
 export GRADLE_HOME" >> /etc/profile
     }
@@ -331,7 +302,7 @@ export GRADLE_HOME" >> /etc/profile
 # Android环境
 android_env() {
     # 0.1 定义变量: 下载地址
-    ADDRESS="https://dl.google.com/android/android-sdk_r${V_ANDROID_SDK}-linux.tgz"
+    ADDRESS="https://dl.google.com/android/repository/sdk-tools-linux-${V_ANDROID_SDK}.zip?hl=zh-cn"
     # 0.2 定义变量: 保存文件名
     SAVE_NAME="android-sdk${V_ANDROID_SDK}.tgz"
     # 0.3 定义变量: 解压目录名
@@ -339,14 +310,13 @@ android_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('android_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_ZIP}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Android_env
-ANDROID_SDK_HOME=${home_path}
+ANDROID_SDK_HOME=${HOME_PATH}
 PATH=\$ANDROID_SDK_HOME/platform-tools:\$ANDROID_SDK_HOME/tools:\$PATH
 export ANDROID_SDK_HOME" >> /etc/profile
     }
@@ -356,7 +326,7 @@ export ANDROID_SDK_HOME" >> /etc/profile
 # Hadoop环境
 hadoop_env() {
     # 0.1 定义变量: 下载地址
-    ADDRESS="http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-${V_HADOOP}/hadoop-${V_HADOOP}.tar.gz"
+    ADDRESS="http://www-us.apache.org/dist/hadoop/common/hadoop-${V_HADOOP}/hadoop-${V_HADOOP}.tar.gz"
     # 0.2 定义变量: 保存文件名
     SAVE_NAME="hadoop${V_HADOOP}.tar.gz"
     # 0.3 定义变量: 解压目录名
@@ -364,14 +334,13 @@ hadoop_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('hadoop_')
     # 1.下载
-    common-dl ${ADDRESS} ${SAVE_NAME}
+    common-dl "${ADDRESS}" "${SAVE_NAME}"
     # 2.解压
-    common-unzip ${SUFFIX_TAR_GZ} ${DIR_NAME}
+    common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）
-    # 3.1这里一直搞不定写入换行问题，所以需要自己实现write函数!!
     write() {
         echo "#:Hadoop_env
-HADOOP_HOME=${home_path}
+HADOOP_HOME=${HOME_PATH}
 PATH=\$HADOOP_HOME/bin:\$PATH
 export HADOOP_HOME" >> /etc/profile
     }
