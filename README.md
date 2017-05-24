@@ -73,4 +73,4 @@ curl -sL https://shell.bluerain.io/release/commons | bash -s /usr/local 1000:100
     curl -sL https://shell.bluerain.io/release/commons | sudo bash -s /usr/local hentioe:hentioe java
     ````
 
-更多的环境有待支持:)
+更多的环境有待支持 :)
