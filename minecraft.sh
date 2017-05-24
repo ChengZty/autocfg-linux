@@ -7,7 +7,7 @@ if [ ! -e ${MC_HOME} ]; then mkdir -p ${MC_HOME};fi
 # 是否存在wget，不存在则安装
 if [ ! -e /usr/bin/wget ];then apt install wget -y;fi
 # 下载server.jar（如果没有参数则下载最新，否则下载参数地址中的版本）
-VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c548254f5e3f66492d178a48db63/server.jar
+VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.11.2/server/f00c294a1576e03fddcac777c3cf4c7d404c4ba4/server.jar
 if test $1;then VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft_server.jar \
 ${VERSION_ADDRESS}

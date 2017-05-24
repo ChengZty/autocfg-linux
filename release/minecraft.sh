@@ -2,7 +2,7 @@
 MC_HOME=/data/minecraft
 if [ ! -e ${MC_HOME} ]; then mkdir -p ${MC_HOME};fi
 if [ ! -e /usr/bin/wget ];then apt install wget -y;fi
-VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.10.2/server/3d501b23df53c548254f5e3f66492d178a48db63/server.jar
+VERSION_ADDRESS=https://launcher.mojang.com/mc/game/1.11.2/server/f00c294a1576e03fddcac777c3cf4c7d404c4ba4/server.jar
 if test $1;then VERSION_ADDRESS=$1;fi
 wget -O ${MC_HOME}/minecraft_server.jar \
 ${VERSION_ADDRESS}
