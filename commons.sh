@@ -16,13 +16,13 @@
 # AndroidSdk -> android #
 # Hadoop     -> hadoop  #
 #########################
-# 当前为开发(Dev)版本
-# 推荐使用release版本
+# 当前为开发版本
+# 推荐使用 release 版本
 
 V_JDK=8u112
 V_SCALA=2.12.2
 V_NODE=6.10.3
-V_GO=1.8.1
+V_GO=1.8.3
 V_GROOVY=2.4.11
 V_GRAILS=3.3.0.M1
 V_MAVEN=3.5.0
