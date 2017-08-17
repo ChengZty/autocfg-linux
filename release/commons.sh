@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 V_JDK=8u112
-V_SCALA=2.12.2
-V_NODE=6.10.3
+V_SCALA=2.12.3
+V_NODE=6.11.2
 V_GO=1.8.3
 V_GROOVY=2.4.11
 V_GRAILS=3.3.0.M1
