@@ -19,16 +19,17 @@
 # 当前为开发版本
 # 推荐使用 release 版本
 
-V_JDK=8u112
-V_SCALA=2.12.3
-V_NODE=8.9.4
-V_GO=1.9.1
-V_GROOVY=2.4.11
-V_GRAILS=3.3.0.M1
-V_MAVEN=3.5.0
-V_GRADLE=4.0.2
+URL_JDK=8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
+V_JDK=8u161
+V_SCALA=2.12.4
+V_NODE=8.10.0
+V_GO=1.10
+V_GROOVY=2.4.14
+V_GRAILS=3.3.3
+V_MAVEN=3.5.3
+V_GRADLE=4.6
 V_ANDROID_SDK=3859397
-V_HADOOP=2.8.0
+V_HADOOP=3.0.0
 
 # Dev Started:
 # 定义（接受传参）常量
@@ -105,7 +106,7 @@ common-set-profile() {
 # Java环境
 java_env() {
     # 0.1 定义变量: 下载地址
-    ADDRESS="http://mirrors.linuxeye.com/jdk/jdk-${V_JDK}-linux-x64.tar.gz"
+    ADDRESS="http://download.oracle.com/otn-pub/java/jdk/${URL_JDK}"
     # 0.2 定义变量: 保存文件名
     SAVE_NAME="jdk${V_JDK}.tar.gz"
     # 0.3 定义变量: 解压目录名
@@ -113,7 +114,11 @@ java_env() {
     # 0.4 定义变量(数组): 删除旧环境变量关键字
     ENV_KEYS=('Java_' 'CLASSPATH')
     # 1.下载
-    common-dl "${ADDRESS}" "${SAVE_NAME}"
+    if [ ! -e "/tmp/${ENV_TYPE}" ];then mkdir "/tmp/${ENV_TYPE}";fi
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -O "/tmp/${ENV_TYPE}/${SAVE_NAME}" "${ADDRESS}"
+    # 定义变量
+    DL_FILE="/tmp/${ENV_TYPE}/${SAVE_NAME}"
+    chmod 777 "/tmp/${ENV_TYPE}" -R
     # 2.解压
     common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     # 3.配置环境变量（永久性）

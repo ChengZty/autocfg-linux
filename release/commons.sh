@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-V_JDK=8u112
-V_SCALA=2.12.3
-V_NODE=6.11.2
-V_GO=1.8.3
-V_GROOVY=2.4.11
-V_GRAILS=3.3.0.M1
-V_MAVEN=3.5.0
-V_GRADLE=4.0.2
+URL_JDK=8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
+V_JDK=8u161
+V_SCALA=2.12.4
+V_NODE=8.10.0
+V_GO=1.10
+V_GROOVY=2.4.14
+V_GRAILS=3.3.3
+V_MAVEN=3.5.3
+V_GRADLE=4.6
 V_ANDROID_SDK=3859397
-V_HADOOP=2.8.0
+V_HADOOP=3.0.0
 SOFT_DIR=$1 
 UID_GID=$2 
 ENV_TYPE=$3 
@@ -57,11 +58,14 @@ common-set-profile() {
     source /etc/profile
 }
 java_env() {
-    ADDRESS="http://mirrors.linuxeye.com/jdk/jdk-${V_JDK}-linux-x64.tar.gz"
+    ADDRESS="http://download.oracle.com/otn-pub/java/jdk/${URL_JDK}"
     SAVE_NAME="jdk${V_JDK}.tar.gz"
     DIR_NAME='jdk'
     ENV_KEYS=('Java_' 'CLASSPATH')
-    common-dl "${ADDRESS}" "${SAVE_NAME}"
+    if [ ! -e "/tmp/${ENV_TYPE}" ];then mkdir "/tmp/${ENV_TYPE}";fi
+    wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" -O "/tmp/${ENV_TYPE}/${SAVE_NAME}" "${ADDRESS}"
+    DL_FILE="/tmp/${ENV_TYPE}/${SAVE_NAME}"
+    chmod 777 "/tmp/${ENV_TYPE}" -R
     common-unzip "${SUFFIX_TAR_GZ}" "${DIR_NAME}"
     write() {
         echo "#:Java_env
