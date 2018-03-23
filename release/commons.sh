@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-URL_JDK=8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
+JDK_VERSION=10
+JDK_ARCH=10+46
+JDK_HASH=76eac37278c24557a3c4199677f19b62
+JDK_FILENAME="jdk-${JDK_VERSION}_linux-x64_bin.tar.gz"
 V_JDK=8u161
 V_SCALA=2.12.4
 V_NODE=8.10.0
@@ -58,8 +61,8 @@ common-set-profile() {
     source /etc/profile
 }
 java_env() {
-    ADDRESS="http://download.oracle.com/otn-pub/java/jdk/${URL_JDK}"
-    SAVE_NAME="jdk${V_JDK}.tar.gz"
+    ADDRESS="http://download.oracle.com/otn-pub/java/jdk/$JDK_ARCH/$JDK_HASH/$JDK_FILENAME"
+    SAVE_NAME="jdk${JDK_VERSION}.tar.gz"
     DIR_NAME='jdk'
     ENV_KEYS=('Java_' 'CLASSPATH')
     if [ ! -e "/tmp/${ENV_TYPE}" ];then mkdir "/tmp/${ENV_TYPE}";fi
