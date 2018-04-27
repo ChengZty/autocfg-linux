@@ -18,21 +18,20 @@
 #########################
 # 当前为开发版本
 # 推荐使用 release 版本
-
-JDK_VERSION=10
-JDK_ARCH=10+46
-JDK_HASH=76eac37278c24557a3c4199677f19b62
+# http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_linux-x64_bin.tar.gz
+JDK_VERSION=10.0.1
+JDK_ARCH=10.0.1+10
+JDK_HASH=fb4372174a714e6b8c52526dc134031e
 JDK_FILENAME="jdk-${JDK_VERSION}_linux-x64_bin.tar.gz"
-V_JDK=8u161
 V_SCALA=2.12.4
-V_NODE=8.10.0
-V_GO=1.10
-V_GROOVY=2.4.14
-V_GRAILS=3.3.3
+V_NODE=8.11.1
+V_GO=1.10.1
+V_GROOVY=2.4.15
+V_GRAILS=3.3.5
 V_MAVEN=3.5.3
-V_GRADLE=4.6
+V_GRADLE=4.7
 V_ANDROID_SDK=3859397
-V_HADOOP=3.0.0
+V_HADOOP=3.1.0
 
 # Dev Started:
 # 定义（接受传参）常量
